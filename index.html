@@ -61,22 +61,6 @@
   .hidden {
     display: none;
   }
-
-  .noselect {
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Old versions of Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-  }
 </style>
 
 <script>
@@ -153,10 +137,10 @@
 </script>
 
 <body ontouchstart="">
-  <h1 class="noselect">Pomodoro</h1>
-  <div id="timer" class="noselect">25:00</div>
+  <h1>Pomodoro</h1>
+  <div id="timer">25:00</div>
   <input id="task" placeholder="What do you want to focus on?" />
-  <button id="start" class="btn noselect" role="button">Start</button>
+  <button id="start" class="btn" role="button">Start</button>
 </body>
 
 </html>
