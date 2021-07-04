@@ -15,7 +15,7 @@
     margin: 0 auto;
   }
 
-  .timer {
+  #timer {
     font-size: 4em;
     font-weight: bold;
   }
@@ -25,7 +25,7 @@
     border-bottom: 1px solid white;
     margin: 12px 0;
     width: 90%;
-    box-sizing:border-box;
+    box-sizing: border-box;
     text-align: center;
     font-size: 1.25em;
     background-color: transparent;
@@ -57,14 +57,106 @@
   .btn:active {
     background-color: #CC3F0C;
   }
+
+  .hidden {
+    display: none;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+  }
 </style>
 
-<body>
-  <h1>Pomodoro</h1>
-  <div class="timer">25:00</div>
-  <input placeholder="What do you want to focus on?" />
-  <br />
-  <button class="btn">Start</button>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let seconds = 0;
+    let running = false;
+    let interval = null;
+
+    const timer = document.getElementById("timer");
+    const input = document.getElementById("task");
+    const startBtn = document.getElementById("start");
+
+    function resetTimer() {
+      seconds = 25 * 60;
+      updateTimeText();
+    }
+
+    function updateTimeText() {
+      timer.innerText = secondsToTimeText(seconds);
+    }
+
+    startBtn.addEventListener("click", function () {
+      if (running) {
+        resetTimer();
+        handleTimerComplete();
+        clearInterval(interval);
+      } else {
+        resetTimer();
+
+        startBtn.innerText = "Stop";
+
+        if (input.value) {
+          input.setAttribute("disabled", "true")
+        } else {
+          input.setAttribute("class", "hidden")
+        }
+
+        interval = setInterval(function () {
+          seconds--;
+          updateTimeText();
+
+          if (seconds === 0) {
+            clearInterval(interval);
+            handleTimerComplete();
+          }
+        }, 1000);
+      }
+
+      running = !running;
+    });
+
+    function handleTimerComplete() {
+      input.removeAttribute("class");
+      input.removeAttribute("disabled");
+      input.value = "";
+      startBtn.innerText = "Start";
+    }
+
+    function secondsToTimeText(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = seconds % 60;
+
+      return pad(String(min)) + ":" + pad(String(sec));
+    }
+
+    function pad(str) {
+      if (str.length == 1) {
+        return "0" + str;
+      }
+      return str;
+    }
+  });
+
+</script>
+
+<body ontouchstart="">
+  <h1 class="noselect">Pomodoro</h1>
+  <div id="timer" class="noselect">25:00</div>
+  <input id="task" placeholder="What do you want to focus on?" />
+  <button id="start" class="btn noselect" role="button">Start</button>
 </body>
 
 </html>
