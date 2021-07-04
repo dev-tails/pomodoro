@@ -1,9 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<title>Pomodoro</title>
+<meta name="description"
+  content="A simple Pomodoro app. Break down work into intervals separated by short breaks to improve focus.">
+<title>Pomodoro App</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #33673B;
+    color: white;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .timer {
+    font-size: 4em;
+    font-weight: bold;
+  }
+
+  input {
+    border: 0;
+    border-bottom: 1px solid white;
+    margin: 12px 0;
+    width: 90%;
+    box-sizing:border-box;
+    text-align: center;
+    font-size: 1.25em;
+    background-color: transparent;
+    color: white;
+  }
+
+  input::placeholder {
+    color: white;
+  }
+
+  input:focus::placeholder {
+    color: transparent;
+  }
+
+  .btn {
+    background-color: #19231A;
+    padding: 4px 12px;
+    display: inline-block;
+    border: 0;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: #29332A;
+  }
+
+  .btn:active {
+    background-color: #CC3F0C;
+  }
+</style>
+
 <body>
-    <h1>Hello World</h1>
+  <h1>Pomodoro</h1>
+  <div class="timer">25:00</div>
+  <input placeholder="What do you want to focus on?" />
+  <br />
+  <button class="btn">Start</button>
 </body>
+
 </html>
